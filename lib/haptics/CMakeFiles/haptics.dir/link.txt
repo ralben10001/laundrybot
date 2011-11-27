@@ -1,0 +1,2 @@
+/usr/bin/ar cr libhaptics.a  CMakeFiles/haptics.dir/UDPSocket.cpp.o CMakeFiles/haptics.dir/thread_socket_interface.cpp.o
+/usr/bin/ranlib libhaptics.a

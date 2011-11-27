@@ -1,0 +1,29 @@
+include_directories(${BULLET_DIR}/src
+		    ${BULLET_DIR}/Demos/OpenGL
+                    ${OSGBULLET_DIR}
+                    ${OSGWORKS_DIR}
+                    ${OpenRAVE_INCLUDE_DIRS}
+                    ${Boost_INCLUDE_DIRS}
+                    ${EIGEN2_INCLUDE_DIR}
+                    ${SURGICAL_PHYSICS_SOURCE_DIR}/lib/haptics)
+set(BULLET_LIBS BulletSoftBody BulletDynamics BulletCollision LinearMath OpenGLSupport) 
+
+add_library(simulation environment.cpp basicobjects.cpp openravesupport.cpp util.cpp simplescene.cpp softbodies.cpp rope.cpp)
+target_link_libraries(simulation haptics osgBullet osgWorks ${GLUT_glut_LIBRARY} ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY} ${OSG_LIBS} ${BULLET_LIBS} ${OpenRAVE_LIBRARIES} ${OpenRAVE_CORE_LIBRARIES})
+
+add_executable(simplescene_test simplescene_test.cpp)
+target_link_libraries(simplescene_test simulation)
+
+add_executable(softbody_test softbody_test.cpp)
+target_link_libraries(softbody_test simulation)
+
+add_executable(LaundryBot LaundryBot.cpp SoftDemo.cpp )
+target_link_libraries(LaundryBot OpenGLSupport  BulletSoftBody BulletDynamics  BulletCollision LinearMath    ${GLUT_glut_LIBRARY} ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY} simulation)
+
+#add_executable(test_playback_joints test_playback_joints.cpp)
+#target_link_libraries(test_playback_joints simulation)
+
+add_executable(test_rope test_rope.cpp)
+target_link_libraries(test_rope simulation)
+
+

@@ -1,0 +1,5 @@
+/home/sanguinus/hojonathanho-bulletsim-56b8d9e/src/CMakeFiles/LaundryBot.dir
+/home/sanguinus/hojonathanho-bulletsim-56b8d9e/src/CMakeFiles/simplescene_test.dir
+/home/sanguinus/hojonathanho-bulletsim-56b8d9e/src/CMakeFiles/simulation.dir
+/home/sanguinus/hojonathanho-bulletsim-56b8d9e/src/CMakeFiles/softbody_test.dir
+/home/sanguinus/hojonathanho-bulletsim-56b8d9e/src/CMakeFiles/test_rope.dir

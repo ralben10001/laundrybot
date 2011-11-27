@@ -1,0 +1,1 @@
+/usr/bin/c++    -D_DEBUG   CMakeFiles/AppMotorDemo.dir/MotorDemo.o CMakeFiles/AppMotorDemo.dir/main.o  -o AppMotorDemo -rdynamic ../OpenGL/libOpenGLSupport.a ../../src/BulletDynamics/libBulletDynamics.a ../../src/BulletCollision/libBulletCollision.a ../../src/LinearMath/libLinearMath.a -lglut -lGL -lGLU 
