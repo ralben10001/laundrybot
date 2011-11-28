@@ -73,15 +73,21 @@ void pickLastAcross(btSoftBody* psb, int direction) {
 
 void dragovertable(int direction) {
 	if (direction == 0) {
+		if (ys[0] < -13)
+			return;
 		ys[0] -= 0.02;
 		ys[1] -= 0.02;
 	}
 	else if (direction == 1) {
+		if (ys[1]  > 13)
+			return;
 		ys[0] += 0.02;
 		ys[1] += 0.02;
 	}
 	else if (direction == 2)
 	{
+		if (xs[1]  < -8)
+			return;
 		xs[0] -=0.02;
 		xs[1] -=0.02;
 	}
@@ -255,7 +261,7 @@ int main() {
 
   shared_ptr <btMotionState> ms(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0,0,0))));
   shared_ptr<BulletObject> table(new BoxObject(0,btVector3(10,10,4),ms));
-  shared_ptr <btMotionState> ms2(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0,0,0))));
+  shared_ptr <btMotionState> ms2(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0,0,-8))));
   shared_ptr<BulletObject> table2(new BoxObject(0,btVector3(50,50,table_thickness/2),ms2));
 
 
@@ -299,12 +305,6 @@ int main() {
   float currtime = 0;
   int iterations = 0;
   float dt = 1.0/60.0;
-  btVector3 goalpost(10,0,17);
-  btTransform origTranst;
-  s.pr2Left->grabber->motionState->getWorldTransform(origTranst);
-  btTransform transt(origTranst);
-  transt.setOrigin(goalpost);
-  s.pr2Right->moveByIK(transt);
   for (int i=0; i < 500000 && !s.viewer.done(); i++) {
     btScalar xg, yg, zg;
 	btScalar maxdrag = 10;
@@ -315,9 +315,11 @@ int main() {
 		yg=ys[i%2];
 		zg=zs[i%2];
 		btVector3 mid = findCenterOfMass(psb);
-		btVector3 goalpos(m_nodes[i]->m_x + btVector3(10,0,9));
+		btVector3 goalpos(m_nodes[i]->m_x + btVector3(10,0,8));
 		btVector3 relPos = goalpos - mid;
 		float theta = -atan(relPos.x()/relPos.y());
+		if (iterations == 1 && currtime < 2)
+			theta  = atan(0);
 		btMatrix3x3 mat(1,0,0,
 		      0,cos(theta+3.1415),-sin(theta+3.1415),
 		      0,sin(theta+3.1415),cos(theta+3.1415));
