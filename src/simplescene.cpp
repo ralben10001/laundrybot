@@ -23,11 +23,11 @@ Scene::Scene(bool enableIK, bool enableHaptics, btScalar pr2Scale) {
 
     // populate the scene with some basic objects
     boost::shared_ptr<btMotionState> ms;
-    ms.reset(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0))));
+    ms.reset(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, -8))));
     ground.reset(new PlaneStaticObject(btVector3(0., 0., 1.), 0., ms));
     env->add(ground);
 
-    btTransform trans(btQuaternion(0, 0, 0, 1), btVector3(-10, 0, -8));
+    btTransform trans(btQuaternion(0, 0, 0, 1), btVector3(-12, 0, -8));
     pr2.reset(new RaveRobotKinematicObject(rave, "robots/pr2-beta-sim.robot.xml", trans, pr2Scale));
     env->add(pr2);
     if (options.enableIK) {
@@ -209,5 +209,4 @@ while (state.idling) {
     // to let other handlers deal with this event too
     return false;
 }
-
 
